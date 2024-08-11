@@ -14,27 +14,32 @@
  * }
  */
 class Solution {
-    HashMap<Integer, Integer> map;
+    int preind;
+    Map<Integer,Integer> inorderindxmap ;
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        int n = inorder.length;
-        map = new HashMap<>();
-        for(int i = 0; i<n; i++){
-            map.put(inorder[i] , i);
+        int preind =0;
+        inorderindxmap=new HashMap<>();
+        for(int i =0;i<inorder.length;i++){
+            inorderindxmap.put(inorder[i],i);
         }
-        return construct(preorder , 0 , n-1 , inorder , 0,n-1);
-    }
-    public TreeNode construct(int[] pre , int ps,int pe , int[] in , int is, int ie){
-        if(ps>pe || is>ie) return null;
-        
-        TreeNode root = new TreeNode(pre[ps]);
-        int idx = map.get(pre[ps]);
-        
-        int count = idx-is;
-        root.left = construct(pre ,ps+1,ps+count, in , is , idx-1);
-        root.right = construct(pre ,ps+count+1,pe, in , idx+1 , ie);
-        
-        return root;
+        return arraytoTree(preorder,0,preorder.length-1);
+
+
 
         
     }
+    public TreeNode arraytoTree(int[] preorder, int left,int right){
+        if(left>right){
+            return null;
+        }
+        int rootvalue = preorder[preind];
+        preind++;
+        TreeNode root = new TreeNode(rootvalue);
+        root.left=arraytoTree(preorder,left,inorderindxmap.get(rootvalue)-1);
+        root.right=arraytoTree(preorder,inorderindxmap.get(rootvalue)+1,right);
+        return root;
+
+
+    }
+
 }
