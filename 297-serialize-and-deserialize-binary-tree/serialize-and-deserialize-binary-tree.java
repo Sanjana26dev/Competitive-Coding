@@ -9,47 +9,41 @@
  */
 public class Codec {
 
-    // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
-            
-        StringBuilder sb = new StringBuilder();
-        Helper1(root , sb);
-        return sb.toString();
-    }
-    public void Helper1(TreeNode root , StringBuilder sb){
-        if(root == null){
-            sb.append("# ");
-            return;
+        
+        public String reserialize(TreeNode root, String str) {
+        if(root==null){
+            str+="null ";
         }
-        sb.append(root.val+" ");
-        Helper1(root.left , sb);
-        Helper1(root.right , sb);
+        else{
+            str+=str.valueOf(root.val) + " ";
+            str=reserialize(root.left, str);
+            str=reserialize(root.right,str);
+        }
+        return str;
     }
+
+    public String serialize(TreeNode root) {
+        return reserialize(root,"");
+    }
+
+
     // Decodes your encoded data to tree.
-    int i;
-    public TreeNode deserialize(String data) {
-        String[] ch = data.split(" ");
-        i = 0;
-        return Helper2(ch);
-    }
-    public TreeNode Helper2(String [] ch){   
-        if(ch[i].equals("#")){
-            i++;
+    public TreeNode redeserialize(List<String> str) {
+        if(str.get(0).equals("null")){
+            str.remove(0);
             return null;
         }
-        TreeNode root = new TreeNode(Integer.parseInt(ch[i]));
-        i++;
-        root.left = Helper2(ch);
-        root.right = Helper2(ch);
+        TreeNode root = new TreeNode(Integer.valueOf(str.get(0)));
+        str.remove(0);
+        root.left = redeserialize(str);
+        root.right = redeserialize(str) ;
         return root;
-    
+    }
 
-        
+    public TreeNode deserialize(String data) {
+        String[] stArray = data.split(" ");
+        List<String> strList= new LinkedList<String>(Arrays.asList(stArray));
+        return redeserialize(strList);
     }
 
 }
-
-// Your Codec object will be instantiated and called as such:
-// Codec ser = new Codec();
-// Codec deser = new Codec();
-// TreeNode ans = deser.deserialize(ser.serialize(root));
