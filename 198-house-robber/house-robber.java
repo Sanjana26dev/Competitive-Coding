@@ -8,7 +8,7 @@ class Solution {
             rob1=rob2;
             rob2=max;
         }
-        return max;
+        return rob2;
         
     }
 }
