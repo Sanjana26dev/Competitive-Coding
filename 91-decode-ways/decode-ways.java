@@ -9,9 +9,11 @@ class Solution {
             int current=0;
             if(s.charAt(i)!='0'){
                 current=one;
+
+
             }
             int value=Integer.parseInt(s.substring(i-1,i+1));
-            if(value>=10 && value <=26){
+            if(value>=10 && value<=26){
                 current=current+two;
             }
             two=one;
