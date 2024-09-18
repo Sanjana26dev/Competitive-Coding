@@ -10,18 +10,17 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<Integer> minheap = new PriorityQueue<>();
-        for(ListNode list : lists){
+        PriorityQueue<Integer> minheap=new PriorityQueue<>();
+        for(ListNode list:lists){
             while(list!=null){
                 minheap.add(list.val);
-                list = list.next;
+                list=list.next;
             }
         }
-        
-        ListNode dummy = new ListNode(1);
-        ListNode merge= dummy;
+        ListNode dummy=new ListNode(1);
+        ListNode merge = dummy;
         while(!minheap.isEmpty()){
-            merge.next= new ListNode(minheap.remove());
+            merge.next=new ListNode(minheap.remove());
             merge=merge.next;
         }
         return dummy.next;
