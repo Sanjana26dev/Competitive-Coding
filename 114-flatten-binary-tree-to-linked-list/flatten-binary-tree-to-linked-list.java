@@ -18,18 +18,17 @@ class Solution {
         if(root==null){
             return null;
         }
-        if(root.left==null && root.right==null){
+        if(root.left ==null && root.right ==null){
             return root;
         }
-        TreeNode left = flattentree(root.left);
-        TreeNode right = flattentree(root.right);
-        if(left != null){
-            left.right= root.right;
+        TreeNode lefttail=flattentree(root.left);
+        TreeNode righttail=flattentree(root.right);
+        if(lefttail!=null){
+            lefttail.right=root.right;
             root.right=root.left;
-            root.left = null;
-
+            root.left=null;
         }
-        return right == null? left : right;
+        return righttail==null?lefttail:righttail;
     }
     public void flatten(TreeNode root) {
         flattentree(root);
