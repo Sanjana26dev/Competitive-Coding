@@ -25,7 +25,7 @@ class Solution {
         }
         int count=0;
         if(root.val>=maxsofar){
-            count=1;
+            count++;
             maxsofar=root.val;
         }
         count += countgoodnodes(root.left,maxsofar);
