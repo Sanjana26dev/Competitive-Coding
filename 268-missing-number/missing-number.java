@@ -1,13 +1,15 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        int xor=0;
+        int rangesum=0;
+        int numsum=0;
         for(int i =0;i<=nums.length;i++){
-            xor=xor^i;
+            rangesum+=i;
         }
+
         for(int i =0;i<nums.length;i++){
-            xor=xor^nums[i];
+            numsum+=nums[i];
         }
-        return xor;
+        return rangesum-numsum;
 
     }
 
