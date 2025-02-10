@@ -1,5 +1,5 @@
 class MinStack {
-    private Node head;
+    public Node head;
 
     public MinStack() {
         
