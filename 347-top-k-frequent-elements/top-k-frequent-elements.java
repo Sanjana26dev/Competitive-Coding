@@ -3,23 +3,22 @@ class Solution {
         if(k==nums.length){
             return nums;
         }
-        HashMap<Integer,Integer> count = new HashMap<>();
-        for(int n:nums){
-            count.put(n,count.getOrDefault(n,0)+1);
+        Map<Integer,Integer> count=new HashMap<>();
+        for(int num:nums){
+            count.put(num,count.getOrDefault(num,0)+1);
         }
-        Queue<Integer> heap= new PriorityQueue<>((a,b) -> count.get(a)-count.get(b));
+        PriorityQueue<Integer> heap=new PriorityQueue<>((a,b)->count.get(a)-count.get(b));
         for(int n:count.keySet()){
             heap.add(n);
             if(heap.size()>k){
                 heap.poll();
             }
         }
-        int[] ans = new int[k];
-        for(int i =0;i<k;i++){
+        int[] ans=new int[k];
+        for(int i=0;i<k;i++){
             ans[i]=heap.poll();
         }
         return ans;
-        
         
     }
 }
