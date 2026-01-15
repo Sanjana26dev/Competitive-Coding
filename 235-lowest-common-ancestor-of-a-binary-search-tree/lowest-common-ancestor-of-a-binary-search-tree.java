@@ -12,9 +12,8 @@ class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         int pval=p.val;
         int qval =q.val;
-        if(root==null) return null;
 
-        while(root!=null){
+        while(true){
             if(pval<root.val && qval<root.val){
                 root=root.left;
             }
@@ -26,6 +25,6 @@ class Solution {
             }
 
         }
-        return null;
+        
     }
 }
